@@ -1,0 +1,11 @@
+Metadata-Version: 1.0
+Name: fibre
+Version: 0.0.1.dev0
+Summary: Abstraction layer for painlessly building object oriented distributed systems that just work
+Home-page: https://github.com/samuelsadok/fibre
+Author: Samuel Sadok
+Author-email: samuel.sadok@bluewin.ch
+License: MIT
+Description: UNKNOWN
+Keywords: communication,transport-layer,rpc
+Platform: UNKNOWN
