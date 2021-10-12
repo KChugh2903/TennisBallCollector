@@ -124,7 +124,7 @@ class Robot:
 
         self.findDrives()
         input("Make sure the motor is free to move, then press enter...")
-        print("Calibrating Odrive for hoverboard motor (you should hear a "
+        print("Calibrating Odrive for all the motors (you should hear a "
         "beep)...")
 
         self.drvAxis1.requested_state = AXIS_STATE_MOTOR_CALIBRATION
