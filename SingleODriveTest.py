@@ -2,7 +2,6 @@ import sys
 import time
 import odrive
 from odrive.enums import *
-from fibre.protocol import ChannelBrokenException
 
 class GearBox:
     KV = 150
@@ -15,22 +14,16 @@ class GearBox:
 
     ENCODER_OFFSET_FLOAT_TOLERANCE = 0.05
 
-    def __init__(self, axis1, axis2):
-        self.axis1 = axis1;
-        self.axis2 = axis2;
+    def __init__(self):
         print("Trying to find drive")
-    
-    def findODrive(self):
         self.drive = odrive.find_any()
-
         self.drvAxis1 = self.drive.axis0
         self.drvAxis2 = self.drive.axis1
+        
+    
     def configure(self):
         print("Erasing pre-existing configuration")
-        try:
-            self.drive.erase_configuration()
-        except ChannelBrokenException:
-            pass
+        self.drive.erase_configuration()
 
         self.drvAxis1.motor.config.pole_pairs = 7
         self.drvAxis2.motor.config.pole_pairs = 7
@@ -64,10 +57,7 @@ class GearBox:
 
         print("Manual configuration saved")
 
-        try:
-            self.drive.reboot()
-        except ChannelBrokenException:
-            pass
+        self.drive.reboot()
 
         self.findODrive()
         input("Make sure the motor is free to move. Now press enter...")
@@ -196,10 +186,7 @@ class GearBox:
         print("Saving calibration configuration and rebooting...")
         self.drive.save_configuration()
         print("Calibration configuration saved. ")
-        try:
-            self.drive.reboot()
-        except ChannelBrokenException:
-            pass
+        self.drive.reboot()
 
         self.findODrive()
         print("CONFIGURATION FINISHED!!")
@@ -219,7 +206,7 @@ class GearBox:
         self.drvAxis2.controller.input_pos = angle/360.0
 
 if __name__ == "__main__":
-    gearbox = GearBox(0,1)
+    gearbox = GearBox()
     print("Motor test time")
     print("Closed looped control rn")
     gearbox.mode_close_loop_control()
