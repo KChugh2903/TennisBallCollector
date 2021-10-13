@@ -2,7 +2,7 @@ import sys
 import time
 import odrive
 from odrive.enums import *
-from fibre.protocol import Channel, ChannelBrokenException
+from fibre.protocol import ChannelBrokenException
 
 class GearBox:
     KV = 150
@@ -23,8 +23,8 @@ class GearBox:
     def findODrive(self):
         self.drive = odrive.find_any()
 
-        self.drvAxis1 = getattr(self.drive, "axis".format(self.axis1))
-        self.drvAxis2 = getattr(self.drive, "axis".format(self.axis2))
+        self.drvAxis1 = self.drive.axis0
+        self.drvAxis2 = self.drive.axis1
     def configure(self):
         print("Erasing pre-existing configuration")
         try:
