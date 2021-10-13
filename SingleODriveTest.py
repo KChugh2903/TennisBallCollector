@@ -20,6 +20,11 @@ class GearBox:
         self.drvAxis1 = self.drive.axis0
         self.drvAxis2 = self.drive.axis1
         
+        self.drvAxis1.controller.config.vel_limit = 22000.0
+        self.drvAxis1.controller.config.current_lim = 11.0
+
+        self.drvAxis2.controller.config.vel_limit = 22000
+        self.drvAxis1.controller.config.current_lim = 11.0
     
     def configure(self):
         print("Erasing pre-existing configuration")
