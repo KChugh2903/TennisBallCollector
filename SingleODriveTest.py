@@ -2,7 +2,7 @@ import sys
 import time
 import odrive
 from odrive.enums import *
-
+from pyPS4Controller.controller import Controller
 class GearBox:
 
     def __init__(self):

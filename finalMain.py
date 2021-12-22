@@ -1,11 +1,10 @@
-from robot import Robot
+from finalRobot import Robot
 from pyPS4Controller.controller import Controller
 
 class MyController(Controller):
     def __init__(self, great):
         Controller.__init__(self, great)
         self.rbt = Robot(0,1)
-        self.rbt.configure()
     def on_L3_up(self):
         self.rbt.forward()
 
@@ -13,10 +12,10 @@ class MyController(Controller):
         self.rbt.backward()
 
     def on_R3_left(self):
-        self.rbt.left()
+        self.rbt.turnLeft()
 
     def on_R3_left(self):
-        self.rbt.right()
+        self.rbt.turnRight()
 
 controller = MyController(interface = "/dev/input/js0",connecting_using_ds4drv = False)
 controller.listen(timeout = 60)
