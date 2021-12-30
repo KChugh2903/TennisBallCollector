@@ -23,11 +23,17 @@ class MyController(Controller):
     def on_L3_y_at_rest(self):
         self.rbt.driveRest()
 
+    def on_R3_x_at_rest(self):
+        self.rbt.driveRest()
+
+    def on_R3_y_at_rest(self):
+        self.rbt.driveRest()
+        
     def on_x_press(self):
         self.rbt.intake()
 
     def on_x_release(self):
         self.rbt.intakeRest()
-        
+
 controller = MyController(interface = "/dev/input/js0",connecting_using_ds4drv = False)
 controller.listen(timeout = 60)
