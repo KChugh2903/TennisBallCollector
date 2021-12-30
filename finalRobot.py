@@ -36,25 +36,33 @@ class Robot:
 
         self.left = self.drive0.axis0
         self.right = self.drive0.axis1
-        self.intake = self.drive1.axis0
+        self.frontIntake = self.drive1.axis0
+        self.backIntake = self.drive1.axis1
 
         self.left.motor.config.pole_pairs = 7
         self.right.motor.config.pole_pairs = 7
-        self.intake.motor.config.pole_pairs = 7
+        self.frontIntake.motor.config.pole_pairs = 7
+        self.backIntake.motor.config.pole_pairs = 7
 
-        self.left.motor.config.torque_constant = 8.27 * self.left.motor.current_control.Iq_measured/ self.KV_DRIVE
-        self.right.motor.config.torque_constant = 8.27 * self.left.motor.current_control.Iq_measured/ self.KV_DRIVE
-        self.intake.motor.config.torque_constant = 8.27 * self.left.motor.current_control.Iq_measured/ self.KV_INTAKE
+        self.left.motor.config.torque_constant = 8.27 * self.left.motor.current_control.Iq_measured/ 150
+        self.right.motor.config.torque_constant = 8.27 * self.left.motor.current_control.Iq_measured/ 150
+        self.frontIntake.motor.config.torque_constant = 8.27 * self.left.motor.current_control.Iq_measured/ 150
+        self.backIntake.motor.config.torque_constant = 8.27 * self.left.motor.current_control.Iq_measured/ 270
 
         self.left.controller.config.control_mode = CONTROL_MODE_VELOCITY_CONTROL
         self.left.encoder.config.mode = ENCODER_MODE_HALL
         self.right.controller.config.control_mode = CONTROL_MODE_VELOCITY_CONTROL
         self.right.encoder.config.mode = ENCODER_MODE_HALL
-        self.intake.controller.config.control_mode = CONTROL_MODE_VELOCITY_CONTROL
-        self.intake.config.enable_sensorless_mode = True
+        self.frontIntake.controller.config.control_mode = CONTROL_MODE_VELOCITY_CONTROL
+        self.frontIntake.encoder.config.mode = ENCODER_MODE_HALL
+        self.backIntake.controller.config.control_mode = CONTROL_MODE_VELOCITY_CONTROL
+        self.backIntake.encoder.config.mode = ENCODER_MODE_HALL
 
         self.left.encoder.config.cpr = 8192
         self.right.encoder.config.cpr = 8192
+        self.frontIntake.encoder.config.cpr = 8192
+        self.backIntake.encoder.config.cpr = 8192
+
     def forward(self):
 
         self.left.controller.input_vel = 20
@@ -71,6 +79,12 @@ class Robot:
     def turnLeft(self):
         self.left.controller.input_vel = -20
         self.right.controller.input_vel = -20
-    
+    def driveRest(self):
+        self.left.controller.input_vel = 0
+        self.right.controller.input_vel = 0
     def intake(self):
-        self.intake.controller.input_vel = 40
+        self.frontIntake.controller.input_vel = -15
+        self.backIntake.controller.input_vel = 10
+    def intakeRest(self):
+        self.frontIntake.controller.input_vel = 0
+        self.backIntake.controller.input_vel = 0
