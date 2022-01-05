@@ -2,36 +2,19 @@ from finalRobot import Robot
 from pyPS4Controller.controller import Controller
 
 class MyController(Controller):
-    def __init__(self, great):
-        Controller.__init__(self, great)
+    def __init__(self, **dwargs):
+        Controller.__init__(self, **dwargs)
         self.rbt = Robot(0,1)
-    def on_L3_up(self):
+    def on_up_arrow_press(self):
         self.rbt.forward()
-
-    def on_L3_down(self):
+    def on_down_arrow_press(self):
         self.rbt.backward()
-
-    def on_R3_left(self):
+    def on_right_arrow_press(self):
         self.rbt.turnLeft()
-
-    def on_R3_left(self):
+    def on_left_arrow_press(self):
         self.rbt.turnRight()
-
-    def on_L3_x_at_rest(self):
-        self.rbt.driveRest()
-
-    def on_L3_y_at_rest(self):
-        self.rbt.driveRest()
-
-    def on_R3_x_at_rest(self):
-        self.rbt.driveRest()
-
-    def on_R3_y_at_rest(self):
-        self.rbt.driveRest()
-        
     def on_x_press(self):
         self.rbt.intake()
-
     def on_x_release(self):
         self.rbt.intakeRest()
 
